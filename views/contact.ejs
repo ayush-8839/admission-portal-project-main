@@ -1,0 +1,66 @@
+<%- include ('./header.ejs') %>
+  <!-- Contact Us -->
+  <section id="contact">
+    <div class="container">
+      <div class="py-5 text-center">
+        <h2 class="mt-5 pt-5">Know More</h2>
+        <p class="lead">We are available to assist you anytime.</p>
+      </div>
+
+      <div class="row g-5">
+
+        <div class="col-md-7 col-lg-8">
+          <h4 class="mb-3">Contact Us!</h4>
+          <form class="needs-validation" novalidate="" action="/insertContact" method="post">
+            <div class="row g-3 paddingValue">
+              <div class="col-12">
+                <label for="firstName" class="form-label">Name</label>
+                <input name="name" type="text" class="form-control" id="firstName" placeholder="Enter Your Name..."
+                  value="" required="" />
+                <div class="invalid-feedback">Valid name is required.</div>
+              </div>
+
+              <div class="col-12">
+                <label for="email" class="form-label">Email
+                  <span class="text-body-secondary"></span></label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com" />
+                <div class="invalid-feedback">
+                  Please enter a valid email address for Contact..
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="email" class="form-label">Phone
+                  <span class="text-body-secondary"></span></label>
+                <input name="phone" type="numuber" class="form-control" id="email" placeholder="" />
+                <div class="invalid-feedback">
+                  Please enter a valid contact number
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="address" class="form-label">Message</label>
+                <textarea name="message" type="text" class="form-control" id="address"
+                  placeholder="Enter Your Message here...." required=""></textarea>
+                <div class="invalid-feedback">
+                  Enter your message.....
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="" class="form-label">
+                  <span class="text-body-secondary"></span></label>
+                <input name="submit" type="submit" class="form-control" id="submit" placeholder="" />
+                <div class="invalid-feedback">
+                   
+                </div>
+              </div>
+              
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Contact Us -->
+
+  <%- include ('./footer.ejs') %>
