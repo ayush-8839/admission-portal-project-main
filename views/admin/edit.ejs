@@ -1,71 +1,63 @@
 <%- include('./sidebar.ejs')%>
-<%- include('./header.ejs') %>
+  <%- include('./header.ejs') %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0 text-dark">Student Data</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Starter Page</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+
+      <!-- Main content -->
+      <div class="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-4">
+              <form action="/admin/StudentUpdate/<%=edit._id%>" method="post">
+                <div class="form-group">
+                  <label for="">Name</label>
+                  <input type="text" value="<%= edit.name%>" name="name" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="">Email</label>
+                  <input type="text" value="<%= edit.email%>" name="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="">Password</label>
+                  <input type="number" value="<%= edit.password%>" name="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">update</button>
+
+              </form>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+          </div>
 
 
 
-  
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Student Data</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content -->
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-
-          </div>
-          <div class="col-md-4">
-            <form action="/admin/StudentUpdate/<%=edit._id%>" method="post">
-              <div class="form-group">
-                <label for="">Name</label>
-                <input type="text" value="<%= edit.name%>" name="name" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="">Email</label>
-                <input type="text" value="<%= edit.email%>" name="email" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="">Password</label>
-                <input type="number" value="<%= edit.password%>" name="password" class="form-control">
-              </div>
-              <button type="submit" class="btn btn-primary">update</button>
-
-            </form>
-          </div>
-          <div class="col-md-4">
-            
-          </div>
-        </div>
-       
-
-        
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  
-
-<%- include('./footer.ejs') %>
-  
+    <!-- /.content-wrapper -->
 
 
+
+    <%- include('./footer.ejs') %>

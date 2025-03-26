@@ -1,33 +1,26 @@
 <%-include('./header.ejs') %>
-    <br><br><br><br><br>
+<%- include('./sidebar.ejs')%>
+     <br><br><br><br><br>
     <div class="container">
 
         <div class="row">
-            <div class="col-md-3" ></div>
-            <div class="col-md-5">
-                <!-- <h2 class="text-center bg-info">Profile</h2> -->
+            <div class="col-md-4"></div>
+            <div class="col-md-6 text-center">
+                <h2 class="text-center text-white" style="background-color: #116466; border-radius: 7px;">Profile</h2>
                 <div class="card">
-                    <img src="<%= i.url %>" alt="" width="200px" height="300px" style="border-radius: 300px;">
-                    <div>
-                        <button data-bs-toggle="modal" data-bs-target="#updateprofile"
-                        class="btn btn text-white" style="background-color: #183e65; width:200px">Update
-                        profile</button>
-                        <br><br>
-    
-                    <button data-bs-toggle="modal" data-bs-target="#ChangePassword"
-                        class="btn btn text-white" style="background-color: #183e65; width:200px">Change
-                        Password</button>
-                    </div>
-
+                    <img class="col-md-6 d-block mx-auto rounded-circle" src="<%= i.url %>" alt="" height="" >
                     <div class="card-body">
-                        <h4 style="font-weight: bold;"><b style="color: #183e65;font-family: 'Open Sans', sans-serif;">Name:</b>
-                            <%= n %>
+                        <h4 style="font-weight: bold;">Name: <%= n %>
                         </h4>
-                        <h4 style="font-weight: bold;"><b style="color: #183e65; font-family: 'Open Sans', sans-serif;">Email:</b>
-                            <%= e %>
+                        <h4 style="font-weight: bold;">Email: <%= e %>
                         </h4>
                         <br>
-                        
+                        <button data-bs-toggle="modal" data-bs-target="#updateprofile" class = "btn btn-info text-white" style="background-color: #116466;"> Update
+                            profile </button>
+
+                        <button data-bs-toggle="modal" data-bs-target="#ChangePassword" class="btn btn-info text-white" style="background-color: #116466;">Change
+                            Password</button>
+
                     </div><!--card body end-->
 
 

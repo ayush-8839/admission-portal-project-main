@@ -1,6 +1,6 @@
 const CourseModel = require("../../models/course");
 const UserModel = require("../../models/user");
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 
 class AdminController {
   static dashboard = async (req, res) => {
@@ -11,6 +11,7 @@ class AdminController {
       console.log(error);
     }
   };
+
   static displayStudent = async (req, res) => {
     try {
       const { name, image } = req.userData;
@@ -95,15 +96,26 @@ class AdminController {
       console.log(error);
     }
   };
+  static Contactdisplay = async (req, res) => {
+    try {
+      const { name, image } = req.userData;
+      const course = await CourseModel.find();
+      //console.log(course)
+
+      res.render("admin/Coursedisplay", { c: course, n: name, i: image });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   static update_status = async (req, res) => {
     try {
       const id = req.params.id;
-      const { name, email, status, comment } = req.body;
+      const { name, email, course, status, comment } = req.body;
       await CourseModel.findByIdAndUpdate(id, {
         status,
         comment,
       });
-      this.sendEmail(name, email, status, comment);
+      this.sendEmail(name, email, course, comment, status);
       res.redirect("/admin/Coursedisplay");
     } catch (error) {
       console.log(error);
@@ -144,7 +156,7 @@ class AdminController {
       }
       await UserModel.findByIdAndUpdate(id, data);
       req.flash("success", "Update Profile successfully");
-      res.redirect("/profile");
+      res.redirect("/admin/profile");
     } catch (error) {
       console.log(error);
     }
@@ -161,49 +173,55 @@ class AdminController {
         //console.log(isMatched)
         if (!isMatched) {
           req.flash("error", "Current password is incorrect ");
-          res.redirect("/profile");
+          res.redirect("/admin/profile");
         } else {
           if (np != cp) {
             req.flash("error", "Password does not match");
-            res.redirect("/profile");
+            res.redirect("/admin/profile");
           } else {
             const newHashPassword = await bcrypt.hash(np, 10);
             await UserModel.findByIdAndUpdate(id, {
               password: newHashPassword,
             });
             req.flash("success", "Password Updated successfully ");
-            res.redirect("/");
+            res.redirect("/admin/profile");
           }
         }
       } else {
         req.flash("error", "ALL fields are required ");
-        res.redirect("/profile");
+        res.redirect("/admin/profile");
       }
     } catch (error) {
       console.log(error);
     }
   };
- 
+  static profile = async (req, res) => {
+    try {
+      const { name, email, image } = req.userData;
+      res.render("admin/profile", { n: name, i: image, e: email });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  static sendEmail = async (name, email,course,comment,status) => {
-    console.log(name,email,course,comment,status)
+  static sendEmail = async (name, email, course, comment, status) => {
+   // console.log(name, email, course, comment, status);
     // connenct with the smtp server
-  
+
     let transporter = await nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
-  
       auth: {
         user: "ayushsharma8739@gmail.com",
         pass: "prze tskb jwco fcno",
       },
     });
     let info = await transporter.sendMail({
-        from: "test@gmail.com", // sender address
-        to: email, // list of receivers
-        subject: ` Course ${course}`, // Subject line
-        text: "heelo", // plain text body
-        html: `<b>${name}</b> Course  <b>${course}</b> <b> ${status}</b><br> successful! </br></b> ${comment} <br>
+      from: "test@gmail.com", // sender address
+      to: email, // list of receivers
+      subject: ` Course ${course}`, // Subject line
+      text: "heelo", // plain text body
+      html: `<b>${name}</b> Course  <b>${course}</b> <b> ${status}</b><br> successful! </br><b> ${comment} </br>
          `, // html body
     });
   };

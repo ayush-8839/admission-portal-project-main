@@ -51,13 +51,20 @@
             </div>
             <% } %>
 
+            <% if(msg.length > 0){ %>
+              <div class="alert alert-success">
+                <!--To Print-->
+                <%= msg %>
+              </div>
+              <% } %>
+
             <!-- User Name -->
             <div class="row mb-4">
-              <div class="col-lg-2 text-center rounded text-light fw-light my-auto p-2"
+              <div class="col-lg-3 text-center rounded text-light fw-light my-auto p-2"
                 style="background-color: #183e65;">
                 Name
               </div>
-              <div class="col-lg-10">
+              <div class="col-lg-9">
                 <input name="name" class="form-control text-capitalize" type="text" placeholder="Enter your name"
                   />
               </div>
@@ -65,22 +72,22 @@
 
             <!-- Email -->
             <div class="row mb-3">
-              <div class="col-lg-2 text-center rounded text-light fw-light my-auto p-2"
+              <div class="col-lg-3 text-center rounded text-light fw-light my-auto p-2"
                 style="background-color: #183e65;">
                 Email
               </div>
-              <div class="col-lg-10">
+              <div class="col-lg-9">
                 <input name="email" class="form-control" type="email" placeholder="name@example.com" />
               </div>
             </div>
 
             <!-- Password -->
             <div class="row mb-4">
-              <div class="col-lg-2 text-center rounded text-light fw-light my-auto p-2"
+              <div class="col-lg-3 text-center rounded text-light fw-light my-auto p-2"
                 style="background-color: #183e65;">
                 Password
               </div>
-              <div class="col-lg-10">
+              <div class="col-lg-9">
                 <input name="password" class="form-control" type="password" />
               </div>
             </div>

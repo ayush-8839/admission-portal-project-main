@@ -4,16 +4,19 @@ const app = express();
 const Port = 3000;
 const web = require("./routing/web");
 const connectDB = require("./db/connectDB");
-const fileUpload = require("express-fileUpload");
+const fileUpload = require("express-fileupload");
 let cookieParser = require("cookie-parser");
- 
+
+
+// app.use(express.json());
+
 //token get
 app.use(cookieParser());
 
 //connect flash and session
 const session = require("express-session");
 const flash = require("connect-flash");
-//messages
+
 app.use(
   session({
     secret: "secret",
@@ -22,6 +25,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 //Flash messages
 app.use(flash());
 

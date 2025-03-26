@@ -8,8 +8,16 @@ body{
 
 
 /* button{
-    background: #183e65 !important; 
+    color: #183e65 !important; 
 } */
+
+.zoom {
+    transition: transform 0.1s; /* Add a smooth transition effect */
+  }
+  
+  .zoom:hover {
+    transform: scale(1.1); /* Zoom in by 10% */
+  }
 
 .merriweather-light {
     font-family: "Merriweather", serif;
@@ -22,7 +30,7 @@ body{
 ------------------------------------------------------------------ */
 
 #navbar nav{
-    background: #0000009c !important;
+    background: white !important;
 }
 
 .webViewPosition{
