@@ -1,114 +1,114 @@
-const CourseModel = require('../../models/course');
-const UserModel= require('../../models/user')
+const CourseModel = require("../../models/course");
+const UserModel = require("../../models/user");
+const nodemailer = require("nodemailer");
 
-class AdminController{
-  
-  static dashboard=async(req,res)=>{
-    try{
+class AdminController {
+  static dashboard = async (req, res) => {
+    try {
       const { name, image } = req.userData;
-       res.render('admin/dashboard',{n:name,i:image})
-    }catch(error){
-        console.log(error)
+      res.render("admin/dashboard", { n: name, i: image });
+    } catch (error) {
+      console.log(error);
     }
-  }
-  static displayStudent=async(req,res)=>{
-    try{
-      const{name,image} = req.userData
-      const data= await UserModel.find()
+  };
+  static displayStudent = async (req, res) => {
+    try {
+      const { name, image } = req.userData;
+      const data = await UserModel.find();
       //console.log(data)
 
-       res.render('admin/displaystudent',{d:data,n:name,i:image})
-    }catch(error){
-        console.log(error)
+      res.render("admin/displaystudent", { d: data, n: name, i: image });
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
-  static deleteStudent=async (req,res)=>{
-    try{
+  static deleteStudent = async (req, res) => {
+    try {
       //console.log(req.params.id)
-      await UserModel.findByIdAndDelete(req.params.id)
-      res.redirect('/admin/studentdisplay')
-    }catch(error){
-      console.log(error)
+      await UserModel.findByIdAndDelete(req.params.id);
+      res.redirect("/admin/studentdisplay");
+    } catch (error) {
+      console.log(error);
     }
-  }
-  static viewStudent=async(req,res)=>{
-    try{
-      const data= await UserModel.findById(req.params.id)
+  };
+  static viewStudent = async (req, res) => {
+    try {
+      const data = await UserModel.findById(req.params.id);
       //console.log(data)
 
-       res.render('admin/view',{view:data})
-    }catch(error){
-        console.log(error)
+      res.render("admin/view", { view: data });
+    } catch (error) {
+      console.log(error);
     }
-  }
-  static editStudent=async(req,res)=>{
-    try{
-      const id=req.params.id;
-      const data= await UserModel.findById(id)
+  };
+  static editStudent = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const data = await UserModel.findById(id);
       //console.log(data)
 
-       res.render('admin/edit',{edit:data})
-    }catch(error){
-        console.log(error)
+      res.render("admin/edit", { edit: data });
+    } catch (error) {
+      console.log(error);
     }
-  }
-  static studentUpdate=async(req,res)=>{
-    try{
-      const id=req.params.id;
-      const {name,email,password}=req.body
-      await UserModel.findByIdAndUpdate(id,{
+  };
+  static studentUpdate = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { name, email, password } = req.body;
+      await UserModel.findByIdAndUpdate(id, {
         name,
         email,
-        password
-      })
+        password,
+      });
 
-      res.redirect('/admin/studentdisplay')
-    }catch(error){
-        console.log(error)
+      res.redirect("/admin/studentdisplay");
+    } catch (error) {
+      console.log(error);
     }
-  }
-  static studentInsert=async(req,res)=>{
-    try{
+  };
+  static studentInsert = async (req, res) => {
+    try {
       //console.log(req.body)
-      
-      const {name,email,password}=req.body
+
+      const { name, email, password } = req.body;
       await UserModel.create({
         name,
         email,
-        password
-      })
+        password,
+      });
 
-       res.redirect('/admin/studentdisplay',)
-    }catch(error){
-        console.log(error)
+      res.redirect("/admin/studentdisplay");
+    } catch (error) {
+      console.log(error);
     }
-  }
-  static Coursedisplay =async(req,res)=>{
-    try{
-      const {name, image} = req.userData;
-      const course = await CourseModel.find()
+  };
+  static Coursedisplay = async (req, res) => {
+    try {
+      const { name, image } = req.userData;
+      const course = await CourseModel.find();
       //console.log(course)
 
-       res.render('admin/Coursedisplay',{c:course, n:name, i:image});
-    }catch(error){
-        console.log(error)
+      res.render("admin/Coursedisplay", { c: course, n: name, i: image });
+    } catch (error) {
+      console.log(error);
     }
-  }
-  static update_status=async(req,res)=>{
-    try{
-      const id=req.params.id;
-      const {name,email,status,comment}=req.body
-      await CourseModel.findByIdAndUpdate(id,{
+  };
+  static update_status = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { name, email, status, comment } = req.body;
+      await CourseModel.findByIdAndUpdate(id, {
         status,
-        comment
-      })
-
-      res.redirect('/admin/Coursedisplay')
-    }catch(error){
-        console.log(error)
+        comment,
+      });
+      this.sendEmail(name, email, status, comment);
+      res.redirect("/admin/Coursedisplay");
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   static updateProfile = async (req, res) => {
     try {
       const { id } = req.userData;
@@ -150,10 +150,10 @@ class AdminController{
     }
   };
 
-  static changePassword = async (req, res) => { 
+  static changePassword = async (req, res) => {
     try {
       const { id } = req.Udata;
-      console.log(req.body)
+      console.log(req.body);
       const { op, np, cp } = req.body;
       if (op && np && cp) {
         const user = await UserModel.findById(id);
@@ -183,5 +183,29 @@ class AdminController{
       console.log(error);
     }
   };
+ 
+
+  static sendEmail = async (name, email,course,comment,status) => {
+    console.log(name,email,course,comment,status)
+    // connenct with the smtp server
+  
+    let transporter = await nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+  
+      auth: {
+        user: "ayushsharma8739@gmail.com",
+        pass: "prze tskb jwco fcno",
+      },
+    });
+    let info = await transporter.sendMail({
+        from: "test@gmail.com", // sender address
+        to: email, // list of receivers
+        subject: ` Course ${course}`, // Subject line
+        text: "heelo", // plain text body
+        html: `<b>${name}</b> Course  <b>${course}</b> <b> ${status}</b><br> successful! </br></b> ${comment} <br>
+         `, // html body
+    });
+  };
 }
-module.exports=AdminController
+module.exports = AdminController;
